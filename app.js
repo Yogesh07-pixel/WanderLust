@@ -3,6 +3,7 @@ const app = express();
 const Listing = require("./models/listing");
 const index = require("./init/index");
 const path = require("path");
+const methodOverride = require("method-override");
 
 const Port = 4000;
 
@@ -10,6 +11,7 @@ const Port = 4000;
 app.use(express.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
+app.use(methodOverride("_method"));
 
 app.get("/", (req, res) => {
   res.send("Hello From the server");
@@ -42,6 +44,26 @@ app.post("/listings", async (req, res) => {
   res.redirect("/listings");
 });
 
+//Edit Route
+app.get("/listings/:id/edit", async (req, res) => {
+  const listing = await Listing.findById(req.params.id);
+  res.render("listings/edit", { listing });
+});
+
+//Update Route
+app.put("/listings/:id", async (req, res) => {
+  let { id } = req.params;
+  await Listing.findByIdAndUpdate(id, { ...req.body.listing });
+  res.redirect(`/listings/${id}`);
+});
+
+// Delet Route
+app.delete("/listings/:id", async (req, res) => {
+  let { id } = req.params;
+  let deleteListing = await Listing.findByIdAndDelete(id);
+  console.log(deleteListing);
+  res.redirect("/listings");
+});
 app.listen(Port, (req, res) => {
   console.log("App is listening on the Port : ", Port);
 });
