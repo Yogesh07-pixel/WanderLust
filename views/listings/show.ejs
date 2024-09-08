@@ -1,28 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Wanderlust</title>
-  </head>
-  <body>
-    <h2>Listing Details</h2>
+<% layout("/layouts/boilerplate") -%>
+<div class="row mt-3">
+  <div class="col-10 col-md-8 mx-auto">
+    <h2 style="text-align: center">Listing Details :</h2>
+  </div>
+
+  <div class="card col-10 col-md-6 mx-auto mt-3 show-card">
     <% if (listing) { %>
-    <ul>
-      <li><%= listing.title %></li>
-      <li><%= listing.description %></li>
-      <li>&#8377; <%= Number(listing.price).toLocaleString("en-IN") %></li>
-      <li><%= listing.location %></li>
-      <li><%= listing.country %></li>
-    </ul>
-    <% } else { %>
-    <p>Listing not found</p>
-    <% } %>
-    <br />
-    <a href="/listings/<%= listing._id %>/edit">Edit this Listing</a>
-    <br /><br />
+
+    <img
+      src="<%= listing.image%>"
+      class="card-img-top show-img"
+      alt="listing_image"
+    />
+    <div class="card-body">
+      <p class="card-text">
+        <b><%= listing.title %></b> <br />
+        <%= listing.description %> <br />
+        &#8377; <%= Number(listing.price).toLocaleString("en-IN") %><br />
+        <%= listing.location %> <br />
+        <%= listing.country %> <br />
+      </p>
+    </div>
+  </div>
+  <% } else { %>
+  <p>Listing not found</p>
+  <% } %>
+  <br />
+
+  <div class="btns mt-3 mb-2 d-flex justify-content-center">
+    <a
+      href="/listings/<%= listing._id %>/edit"
+      class="btn btn-dark mx-2 edit-btn"
+    >
+      Edit
+    </a>
     <form method="POST" action="/listings/<%= listing._id%>?_method=DELETE">
-      <button>Delete this Listing</button>
+      <button class="btn btn-dark mx-2 delete-btn">Delete</button>
     </form>
-  </body>
-</html>
+  </div>
+</div>
