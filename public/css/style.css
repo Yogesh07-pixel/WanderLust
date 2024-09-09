@@ -1,4 +1,4 @@
-bode {
+body {
   font-family: "Plus Jakarta Sans", sans-serif;
   /* font-optical-sizing: auto;
   font-weight: 200;
@@ -11,10 +11,27 @@ bode {
   flex: 1;
 }
 
+/* Navbar Styling */
+.navbar-toggler {
+  border: none;
+}
+
+.navbar-collapse {
+  background-color: white; /* Background color when expanded */
+}
+.navbar-nav .nav-link {
+  padding-left: 15px;
+  padding-right: 15px;
+}
+.navbar-collapse.collapse.show {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional: Add a subtle shadow when expanded */
+}
+
 .navbar {
   height: 5rem;
   font-size: 1.1rem;
   background-color: white;
+  z-index: 1000;
 }
 .fa-compass {
   font-size: 2.5rem;
