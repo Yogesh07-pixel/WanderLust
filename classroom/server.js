@@ -1,37 +1,29 @@
 const express = require("express");
 const app = express();
-const users = require("./routes/user");
-const posts = require("./routes/post");
+const session = require("express-session");
 const PORT = 5000;
 
-// //Middleware
-// app.use(cookieParser("secretcode"));
+const sessionOptions = {
+  secret: "mysupersecretstring",
+  resave: false,
+  saveUninitialized: true,
+};
 
-// //Singed Cookie
-// app.get("/getsignedcookie", (req, res) => {
-//   res.cookie("made-In", "California", { signed: true });
-//   res.send("Signed cookie sent.");
-// });
-// app.get("/getcookies", (req, res) => {
-//   res.cookie("greet", "namaste");
-//   res.cookie("madeIn", "India");
-//   res.send("Sent you some cookie.");
-// });
+app.use(session(sessionOptions));
 
-// app.get("/request", (req, res) => {
-//   let { price = "anonymous", name = "anonymous" } = req.cookies;
-//   res.send(
-//     `Hello ${name}! Bhai please ${price} rupee bhejde taki me Library me jake Padh saku...`
-//   );
-// });
-// app.get("/", (req, res) => {
-//   console.dir(req.cookies);
-//   res.send("Hello I am Root!");
-// });
+app.get("/register", (req, res) => {
+  let { name = "anonymous" } = req.query;
+  req.session.name = name;
+  res.redirect("/hello");
+});
 
-// app.use("/users", users);
-// app.use("/posts", posts);
+app.get("/hello", (req, res) => {
+  res.send(`Hello , ${req.session.name}`);
+});
+// app.get("/test", (req, res) => {
+//   res.send("Test successfull");
+// });
 
 app.listen(PORT, (req, res) => {
-  console.log("App is liestening on the Port :", PORT);
+  console.log("App is listening on the Port :", PORT);
 });
