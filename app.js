@@ -1,5 +1,5 @@
 const express = require("express");
-const mongoose = require("mongoose");
+const index = require("./init/index");
 const app = express();
 const path = require("path");
 const methodOverride = require("method-override");
@@ -15,20 +15,6 @@ const Port = 4000;
 const listingRouter = require("./routes/listing");
 const reviewRouter = require("./routes/review");
 const userRouter = require("./routes/user");
-
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
-
-main()
-  .then(() => {
-    console.log("Connected to MongoDB Succesfully");
-  })
-  .catch((err) => {
-    console.log("Error : ", err);
-  });
-
-async function main() {
-  await mongoose.connect(MONGO_URL);
-}
 
 //Middlewares
 app.use(express.urlencoded({ extended: true }));
