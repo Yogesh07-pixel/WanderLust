@@ -5,14 +5,16 @@ const path = require("path");
 const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError");
-const listings = require("./routes/listing");
-const review = require("./routes/review");
 const session = require("express-session");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 const User = require("./models/user");
 const Port = 4000;
+
+const listingRouter = require("./routes/listing");
+const reviewRouter = require("./routes/review");
+const userRouter = require("./routes/user");
 
 const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
 
@@ -63,21 +65,23 @@ passport.deserializeUser(User.deserializeUser());
 app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
+  res.locals.currUser = req.user;
   next();
 });
 
-app.get("/demouser", async (req, res) => {
-  let fakeUser = new User({
-    email: "demo@gmail.com",
-    username: "Random-user",
-  });
+// app.get("/demouser", async (req, res) => {
+//   let fakeUser = new User({
+//     email: "demo@gmail.com",
+//     username: "Random-user",
+//   });
 
-  const registeredUser = await User.register(fakeUser, "helloworld");
-  res.send(registeredUser);
-});
+//   const registeredUser = await User.register(fakeUser, "helloworld");
+//   res.send(registeredUser);
+// });
 
-app.use("/listings", listings);
-app.use("/listings/:id/reviews", review);
+app.use("/listings", listingRouter);
+app.use("/listings/:id/reviews", reviewRouter);
+app.use("/", userRouter);
 
 //Page not found
 app.all("*", (req, res, next) => {
