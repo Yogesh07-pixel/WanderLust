@@ -104,6 +104,11 @@ body {
 .add-btn {
   background-color: #6260ebdc;
   border: none;
+  width: fit-content;
+  position: relative;
+  margin-left: 50%;
+  margin-right: 50%;
+  translate: -50%;
 }
 /* Edit Page */
 .edit-btn {
