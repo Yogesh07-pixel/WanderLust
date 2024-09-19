@@ -25,6 +25,14 @@ const listingSchema = new Schema({
     type: Schema.Types.ObjectId,
     ref: "User",
   },
+  coordinates: {
+    lat: {
+      type: Number,
+    },
+    lon: {
+      type: Number,
+    },
+  },
 });
 
 listingSchema.post("findOneAndDelete", async (listing) => {

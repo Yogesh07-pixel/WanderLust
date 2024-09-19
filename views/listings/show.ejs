@@ -43,8 +43,8 @@
   </div>
   <% } %>
   <div class="col-10 col-md-8 mx-auto mb-3">
-    <hr />
     <% if(currUser) { %>
+    <hr />
     <h4>Leave a Review</h4>
     <form
       action="/listings/<%= listing.id %>/reviews"
@@ -52,17 +52,6 @@
       novalidate
       class="needs-validation"
     >
-      <!-- <div class="mb-3 mt-3">
-        <label for="rating" class="form-label">Rating</label>
-        <input
-          type="range"
-          min="1"
-          max="5"
-          id="rating"
-          name="review[rating]"
-          class="form-range"
-        />
-      </div> -->
       <div class="mb-3 mt-3">
         <label for="rating" class="form-label">Rating</label>
         <fieldset class="starability-slot">
@@ -126,10 +115,9 @@
       </div>
       <button class="btn btn-outline-dark">Submit</button>
     </form>
-    <% } %>
-
-    <p><b>All Reviews</b></p>
+    <% } %> <% if(listing.reviews.length > 0) { %>
     <div class="row">
+      <p><b>All Reviews</b></p>
       <% for(review of listing.reviews) { %>
       <div class="card col-5 ms-3 mb-3">
         <div class="card-body d-flex flex-column">
@@ -151,5 +139,12 @@
 
       <% } %>
     </div>
+    <% } %>
+  </div>
+  <div class="col-10 col-md-8 mx-auto mb-3">
+    <h2>Where you'll be</h2>
+    <div id="map"></div>
   </div>
 </div>
+
+<script src="/js/map.js"></script>
