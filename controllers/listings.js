@@ -37,7 +37,6 @@ async function geocodeAddress(address) {
     const response = await axios.get(url);
     if (response.data.length > 0) {
       const { lat, lon } = response.data[0];
-      // console.log(`Coordinates: Latitude: ${lat}, Longitude: ${lon}`);
       return { lat: parseFloat(lat), lon: parseFloat(lon) };
     } else {
       console.log("No results found for the address.");
@@ -60,15 +59,30 @@ module.exports.createListing = async (req, res, next) => {
     );
     return res.redirect("/listings/new");
   }
-  let url = req.file.path;
-  let filename = req.file.filename;
-  const newListing = new Listing(req.body.listing);
-  newListing.owner = req.user._id;
-  newListing.image = { url, filename };
-  newListing.coordinates = { lat: coordinates.lat, lon: coordinates.lon };
-  let saveListing = await newListing.save();
-  req.flash("success", "New listing created!");
-  res.redirect("/listings");
+  try {
+    let url = req.file.path;
+    console.log(url);
+    let filename = req.file.filename;
+    const newListing = new Listing(req.body.listing);
+    newListing.owner = req.user._id;
+    newListing.image = { url, filename };
+    var Longitude = coordinates.lon;
+    var Latitude = coordinates.lat;
+    if (Longitude < 0) {
+      Longitude *= -1;
+    }
+    if (Latitude < 0) {
+      Latitude *= -1;
+    }
+    console.log((newListing.coordinates = { lat: Latitude, lon: Longitude }));
+    await newListing.save();
+    req.flash("success", "New listing created!");
+    return res.redirect("/listings");
+  } catch (error) {
+    console.error("Error Uploading Image or creating Listing");
+    req.flash("error", "Something went wrong. Please try again!");
+    res.redirect("/listings");
+  }
 };
 
 module.exports.renderEditForm = async (req, res) => {
