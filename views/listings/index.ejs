@@ -1,6 +1,151 @@
 <% layout("/layouts/boilerplate") -%>
-<h3>All Listings</h3>
-<div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 row-cols-1">
+<!-- <h3>All Listings</h3> -->
+
+<style>
+  #filters {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  .filter_img {
+    width: 30px;
+    height: 30px;
+  }
+  .filter p {
+    font-size: 0.8rem;
+  }
+  .filter {
+    text-align: center;
+    margin-right: 2rem;
+    margin-top: 2rem;
+    opacity: 0.6;
+  }
+  .filter:hover {
+    opacity: 1;
+    cursor: pointer;
+  }
+</style>
+
+<div id="filters">
+  <div class="filter">
+    <div>
+      <img class="filter_img" src="/Assets/Images/Surfing.svg" alt="Surfing" />
+    </div>
+    <p>Surfing</p>
+  </div>
+  <div class="filter">
+    <div>
+      <img class="filter_img" src="/Assets/Images/Farm.svg" alt="Farm" />
+    </div>
+    <p>Farm</p>
+  </div>
+  <div class="filter">
+    <div>
+      <img class="filter_img" src="/Assets/Images/Island.svg" alt="Farm" />
+    </div>
+    <p>Islands</p>
+  </div>
+  <div class="filter">
+    <div>
+      <img class="filter_img" src="/Assets/Images/Countryside.svg" alt="Farm" />
+    </div>
+    <p>Countryside</p>
+  </div>
+  <div class="filter">
+    <div>
+      <img class="filter_img" src="/Assets/Images/City.svg" alt="Farm" />
+    </div>
+    <p>Iconic Cities</p>
+  </div>
+  <div class="filter">
+    <div>
+      <img
+        class="filter_img"
+        src="/Assets/Images/Creativespaces.svg"
+        alt="Farm"
+      />
+    </div>
+    <p>Creative spaces</p>
+  </div>
+  <div class="filter">
+    <div>
+      <img class="filter_img" src="/Assets/Images/Camping.svg" alt="Farm" />
+    </div>
+    <p>Camping</p>
+  </div>
+  <div class="filter">
+    <div>
+      <img class="filter_img" src="/Assets/Images/Barns.svg" alt="Farm" />
+    </div>
+    <p>Barns</p>
+  </div>
+  <div class="filter">
+    <div>
+      <img class="filter_img" src="/Assets/Images/Arctic.svg" alt="Farm" />
+    </div>
+    <p>Arctic</p>
+  </div>
+  <div class="filter">
+    <div>
+      <img class="filter_img" src="/Assets/Images/Castle.svg" alt="Farm" />
+    </div>
+    <p>Castle</p>
+  </div>
+  <div class="filter">
+    <div>
+      <img class="filter_img" src="/Assets/Images/Desert.svg" alt="Farm" />
+    </div>
+    <p>Desert</p>
+  </div>
+  <div class="filter">
+    <div>
+      <img class="filter_img" src="/Assets/Images/windmill.svg" alt="Farm" />
+    </div>
+    <p>Windmills</p>
+  </div>
+  <div class="filter">
+    <div>
+      <img class="filter_img" src="/Assets/Images/Skiing.svg" alt="Farm" />
+    </div>
+    <p>Skiing</p>
+  </div>
+  <div class="filter">
+    <div>
+      <img class="filter_img" src="/Assets/Images/Piano.svg" alt="Farm" />
+    </div>
+    <p>Grand Pianos</p>
+  </div>
+  <div class="filter">
+    <div>
+      <img class="filter_img" src="/Assets/Images/Golfing.svg" alt="Farm" />
+    </div>
+    <p>Golfing</p>
+  </div>
+  <div class="filter">
+    <div>
+      <img
+        class="filter_img"
+        src="/Assets/Images/Bed's&Breakfast.svg"
+        alt="Farm"
+      />
+    </div>
+    <p>Bed's & Breakfast</p>
+  </div>
+  <div class="tax-toggle">
+    <div class="form-check-reverse form-switch">
+      <input
+        class="form-check-input"
+        type="checkbox"
+        role="switch"
+        id="flexSwitchCheckDefault"
+      />
+      <label class="form-check-label" for="flexSwitchCheckDefault"
+        >Display total after taxes</label
+      >
+    </div>
+  </div>
+</div>
+
+<div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 row-cols-1 mt-3">
   <% for(let listing of allListings) { %>
   <a href="/listings/<%= listing._id%>" class="listing-link">
     <div class="card col listing-card">
