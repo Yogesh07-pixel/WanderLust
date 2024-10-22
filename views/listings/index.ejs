@@ -2,10 +2,23 @@
 <!-- <h3>All Listings</h3> -->
 
 <style>
-  #filters {
+  #parent-container {
     display: flex;
-    flex-wrap: wrap;
+    justify-content: space-between;
     align-items: center;
+    flex-wrap: nowrap;
+  }
+  #filters-container {
+    display: flex;
+    width: 70%;
+    overflow-x: auto;
+    white-space: nowrap;
+    padding-bottom: 10px;
+  }
+  #filters {
+    display: inline-flex;
+    align-items: center;
+    width: 100%;
   }
   .filter_img {
     width: 30px;
@@ -24,6 +37,18 @@
     opacity: 1;
     cursor: pointer;
   }
+
+  /* Button Filter Button Styling */
+  button#prevBtn,
+  button#nextBtn {
+    border: none;
+    background: none;
+  }
+  button#prevBtn img,
+  button#nextBtn img {
+    height: 30px;
+    width: 30px;
+  }
   .tax_Info {
     display: none;
   }
@@ -33,113 +58,303 @@
     height: 3.5rem;
     padding: 1rem;
   }
-</style>
+  /* Additional styling for scrollbar visibility */
+  #filters-container::-webkit-scrollbar {
+    height: 2px;
+  }
 
-<div id="filters">
-  <div class="filter">
-    <div>
-      <img class="filter_img" src="/Assets/Images/Surfing.svg" alt="Surfing" />
+  #filters-container::-webkit-scrollbar-thumb {
+    background-color: #ccc;
+    border-radius: 10px;
+  }
+
+  #filters-container::-webkit-scrollbar-track {
+    background-color: #f1f1f1;
+  }
+
+  @media (max-width: 768px) {
+    button#prevBtn,
+    button#nextBtn {
+      display: none;
+    }
+    #filters-container {
+      width: 50%;
+    }
+    .tax-toggle {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 0.5rem;
+      width: 40%;
+    }
+
+    .form-check-label {
+      font-size: 0.8rem;
+    }
+
+    .form-check-input {
+      margin-top: 0.5rem;
+    }
+  }
+  @media (min-width: 768px) and (max-width: 1230px) {
+    #parent-container,
+    #filters-container {
+      width: 100%;
+    }
+    .tax-toggle {
+      display: none;
+    }
+  }
+</style>
+<div id="parent-container">
+  <!-- Left Button -->
+  <button id="prevBtn" onclick="scrollLeftSide()">
+    <img src="/Assets/Images/PrevBtn.svg" alt="" />
+  </button>
+
+  <div id="filters-container">
+    <div id="filters">
+      <div class="filter">
+        <div>
+          <img
+            class="filter_img"
+            src="/Assets/Images/Surfing.svg"
+            alt="Surfing"
+          />
+        </div>
+        <p>Surfing</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img class="filter_img" src="/Assets/Images/Farm.svg" alt="Farm" />
+        </div>
+        <p>Farm</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img
+            class="filter_img"
+            src="/Assets/Images/Island.svg"
+            alt="Islands"
+          />
+        </div>
+        <p>Islands</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img
+            class="filter_img"
+            src="/Assets/Images/Countryside.svg"
+            alt="Countryside"
+          />
+        </div>
+        <p>Countryside</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img
+            class="filter_img"
+            src="/Assets/Images/City.svg"
+            alt="Iconic Cities"
+          />
+        </div>
+        <p>Iconic Cities</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img
+            class="filter_img"
+            src="/Assets/Images/Creativespaces.svg"
+            alt="Creative spaces"
+          />
+        </div>
+        <p>Creative spaces</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img
+            class="filter_img"
+            src="/Assets/Images/Camping.svg"
+            alt="Camping"
+          />
+        </div>
+        <p>Camping</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img class="filter_img" src="/Assets/Images/Barns.svg" alt="Barns" />
+        </div>
+        <p>Barns</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img
+            class="filter_img"
+            src="/Assets/Images/Arctic.svg"
+            alt="Arctic"
+          />
+        </div>
+        <p>Arctic</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img
+            class="filter_img"
+            src="/Assets/Images/Castle.svg"
+            alt="Castle"
+          />
+        </div>
+        <p>Castle</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img
+            class="filter_img"
+            src="/Assets/Images/Desert.svg"
+            alt="Desert"
+          />
+        </div>
+        <p>Desert</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img
+            class="filter_img"
+            src="/Assets/Images/windmill.svg"
+            alt="Windmills"
+          />
+        </div>
+        <p>Windmills</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img
+            class="filter_img"
+            src="/Assets/Images/Skiing.svg"
+            alt="Skiing"
+          />
+        </div>
+        <p>Skiing</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img
+            class="filter_img"
+            src="/Assets/Images/Piano.svg"
+            alt="Grand Pianos"
+          />
+        </div>
+        <p>Grand Pianos</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img
+            class="filter_img"
+            src="/Assets/Images/Golfing.svg"
+            alt="Golfing"
+          />
+        </div>
+        <p>Golfing</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img
+            class="filter_img"
+            src="/Assets/Images/Bed's&Breakfast.svg"
+            alt="Farm"
+          />
+        </div>
+        <p>Bed's & Breakfast</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img class="filter_img" src="/Assets/Images/Play.svg" alt="Play" />
+        </div>
+        <p>Play</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img class="filter_img" src="/Assets/Images/OMG!.svg" alt="OMG!" />
+        </div>
+        <p>OMG!</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img
+            class="filter_img"
+            src="/Assets/Images/Houseboats.svg"
+            alt="Houseboats"
+          />
+        </div>
+        <p>Houseboats</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img class="filter_img" src="/Assets/Images/New.svg" alt="New" />
+        </div>
+        <p>New!</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img
+            class="filter_img"
+            src="/Assets/Images/TinyHomes.svg"
+            alt="TinyHomes"
+          />
+        </div>
+        <p>Tiny Homes</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img class="filter_img" src="/Assets/Images/Luxe.svg" alt="Luxe" />
+        </div>
+        <p>Luxe</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img class="filter_img" src="/Assets/Images/Riads.svg" alt="Riads" />
+        </div>
+        <p>Riads</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img
+            class="filter_img"
+            src="/Assets/Images/Vineyards.svg"
+            alt="Vineyards"
+          />
+        </div>
+        <p>Vineyards</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img
+            class="filter_img"
+            src="/Assets/Images/Chef's & Kitchen.svg"
+            alt="Chef's kitchens"
+          />
+        </div>
+        <p>Chef's kitchens</p>
+      </div>
+      <div class="filter">
+        <div>
+          <img
+            class="filter_img"
+            src="/Assets/Images/Hanoks.svg"
+            alt="Hanoks"
+          />
+        </div>
+        <p>Hanoks</p>
+      </div>
     </div>
-    <p>Surfing</p>
   </div>
-  <div class="filter">
-    <div>
-      <img class="filter_img" src="/Assets/Images/Farm.svg" alt="Farm" />
-    </div>
-    <p>Farm</p>
-  </div>
-  <div class="filter">
-    <div>
-      <img class="filter_img" src="/Assets/Images/Island.svg" alt="Farm" />
-    </div>
-    <p>Islands</p>
-  </div>
-  <div class="filter">
-    <div>
-      <img class="filter_img" src="/Assets/Images/Countryside.svg" alt="Farm" />
-    </div>
-    <p>Countryside</p>
-  </div>
-  <div class="filter">
-    <div>
-      <img class="filter_img" src="/Assets/Images/City.svg" alt="Farm" />
-    </div>
-    <p>Iconic Cities</p>
-  </div>
-  <div class="filter">
-    <div>
-      <img
-        class="filter_img"
-        src="/Assets/Images/Creativespaces.svg"
-        alt="Farm"
-      />
-    </div>
-    <p>Creative spaces</p>
-  </div>
-  <div class="filter">
-    <div>
-      <img class="filter_img" src="/Assets/Images/Camping.svg" alt="Farm" />
-    </div>
-    <p>Camping</p>
-  </div>
-  <div class="filter">
-    <div>
-      <img class="filter_img" src="/Assets/Images/Barns.svg" alt="Farm" />
-    </div>
-    <p>Barns</p>
-  </div>
-  <div class="filter">
-    <div>
-      <img class="filter_img" src="/Assets/Images/Arctic.svg" alt="Farm" />
-    </div>
-    <p>Arctic</p>
-  </div>
-  <div class="filter">
-    <div>
-      <img class="filter_img" src="/Assets/Images/Castle.svg" alt="Farm" />
-    </div>
-    <p>Castle</p>
-  </div>
-  <div class="filter">
-    <div>
-      <img class="filter_img" src="/Assets/Images/Desert.svg" alt="Farm" />
-    </div>
-    <p>Desert</p>
-  </div>
-  <div class="filter">
-    <div>
-      <img class="filter_img" src="/Assets/Images/windmill.svg" alt="Farm" />
-    </div>
-    <p>Windmills</p>
-  </div>
-  <div class="filter">
-    <div>
-      <img class="filter_img" src="/Assets/Images/Skiing.svg" alt="Farm" />
-    </div>
-    <p>Skiing</p>
-  </div>
-  <div class="filter">
-    <div>
-      <img class="filter_img" src="/Assets/Images/Piano.svg" alt="Farm" />
-    </div>
-    <p>Grand Pianos</p>
-  </div>
-  <div class="filter">
-    <div>
-      <img class="filter_img" src="/Assets/Images/Golfing.svg" alt="Farm" />
-    </div>
-    <p>Golfing</p>
-  </div>
-  <div class="filter">
-    <div>
-      <img
-        class="filter_img"
-        src="/Assets/Images/Bed's&Breakfast.svg"
-        alt="Farm"
-      />
-    </div>
-    <p>Bed's & Breakfast</p>
-  </div>
+
+  <!-- Right Button -->
+  <button id="nextBtn" onclick="scrollRightSide()">
+    <img src="/Assets/Images/NextBtn.svg" alt="" />
+  </button>
+
+  <!-- Tax Button -->
   <div class="tax-toggle">
     <div class="form-check-reverse form-switch">
       <input
@@ -154,7 +369,6 @@
     </div>
   </div>
 </div>
-
 <div class="row row-cols-lg-3 row-cols-md-3 row-cols-sm-1 row-cols-1 mt-3">
   <% for(let listing of allListings) { %>
   <a href="/listings/<%= listing._id%>" class="listing-link">
@@ -190,4 +404,14 @@
       }
     }
   });
+
+  function scrollLeftSide() {
+    const container = document.getElementById("filters-container");
+    container.scrollLeft -= 200; // Adjust the value as needed
+  }
+
+  function scrollRightSide() {
+    const container = document.getElementById("filters-container");
+    container.scrollLeft += 200; // Adjust the value as needed
+  }
 </script>
