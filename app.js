@@ -3,6 +3,7 @@ if (process.env.NODE_ENV != "production") {
 }
 
 const express = require("express");
+const mongoose = require("mongoose");
 const index = require("./init/index");
 const app = express();
 const path = require("path");
@@ -10,6 +11,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError");
 const session = require("express-session");
+const MongoStore = require("connect-mongo");
 const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
@@ -28,8 +30,35 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "public")));
 
+const DB_URL = process.env.DB_URL;
+
+main()
+  .then(() => {
+    console.log("Connected to MongoDB Succesfully");
+  })
+  .catch((err) => {
+    console.log("Error : ", err);
+  });
+
+async function main() {
+  await mongoose.connect(DB_URL);
+}
+
+const store = MongoStore.create({
+  mongoUrl: DB_URL,
+  crypto: {
+    secret: process.env.SECRET,
+  },
+  touchAfter: 24 * 3600,
+});
+
+store.on("error", () => {
+  console.log("Error in Mongo Session Store", err);
+});
+
 const sessionOptions = {
-  secret: "mysupersecretcode",
+  store,
+  secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
   cookie: {
@@ -59,7 +88,6 @@ app.use("/listings", listingRouter);
 app.use("/listings/:id/reviews", reviewRouter);
 app.use("/", userRouter);
 
-//Page not found
 app.all("*", (req, res, next) => {
   next(new ExpressError(404, "Page not Found!"));
 });
