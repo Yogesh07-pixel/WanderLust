@@ -61,7 +61,6 @@ module.exports.createListing = async (req, res, next) => {
   }
   try {
     let url = req.file.path;
-    console.log(url);
     let filename = req.file.filename;
     const newListing = new Listing(req.body.listing);
     newListing.owner = req.user._id;
@@ -74,7 +73,6 @@ module.exports.createListing = async (req, res, next) => {
     if (Latitude < 0) {
       Latitude *= -1;
     }
-    console.log((newListing.coordinates = { lat: Latitude, lon: Longitude }));
     await newListing.save();
     req.flash("success", "New listing created!");
     return res.redirect("/listings");
