@@ -1,0 +1,10 @@
+services:
+  - type: web
+    name: WanderLust
+    env: node
+    plan: free
+    buildCommand: npm install
+    startCommand: node app.js
+    repo: https://github.com/Yogesh07-pixel/WanderLust
+    branch: main
+    autoDeploy: false
