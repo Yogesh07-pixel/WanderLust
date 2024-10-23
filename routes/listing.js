@@ -19,8 +19,6 @@ router
     wrapAsync(listingController.createListing)
   );
 
-router.get("/", (req, res) => {});
-
 //New Route
 router.get("/new", isLoggedIn, listingController.renderNewForm);
 
