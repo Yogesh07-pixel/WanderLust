@@ -73,6 +73,7 @@ module.exports.createListing = async (req, res, next) => {
     if (Latitude < 0) {
       Latitude *= -1;
     }
+    newListing.coordinates = { lat: Latitude, lon: Longitude };
     await newListing.save();
     req.flash("success", "New listing created!");
     return res.redirect("/listings");
